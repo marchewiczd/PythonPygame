@@ -1,4 +1,5 @@
 import DisplayModule
 
-boolean = DisplayModule.handle_display()
+game_screen = DisplayModule.GameScreen()
+game_screen.handle_display()
 quit
