@@ -99,9 +99,6 @@ class GameScreen():
         else:
             self.game_screen = pygame.display.set_mode((self.__width, self.__height))
             self.game_screen.fill(self.__white_rgb_color)
-
-            self.__player_image = pygame.image.load(self.__player_img)
-            self.__player_image = pygame.transform.scale(self.__player_image, (50, 50))
             
             pygame.display.set_caption(self.__title)
             return True
