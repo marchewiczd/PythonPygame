@@ -12,6 +12,7 @@ class GameScreen():
     __clock = pygame.time.Clock()
     __is_shutdown = False
     __player_img = "../resources/player.png"
+    __npc_img = "../resources/enemy.png"
     
     def __init__(self, screen_width = 800, screen_height = 800):
         """
@@ -57,6 +58,7 @@ class GameScreen():
             True if no errors, false otherwise.
         """
         player = GameModules.PlayerObject(self.__player_img, 375, 700, 50, 50)
+        enemy_0 = GameModules.NpcObject(self.__npc_img, 20, 400, 50, 50)
         direction = 0
 
         if not self.__init_display():
@@ -82,9 +84,12 @@ class GameScreen():
                         #move down
                         direction = 0
 
-            player.move(direction)
+            player.move(direction, self.__height)
             self.game_screen.fill(self.__white_rgb_color)
             player.draw(self.game_screen)
+
+            enemy_0.move(self.__width)
+            enemy_0.draw(self.game_screen)
 
             pygame.display.update()
             self.__clock.tick(self.__tick_rate)            
