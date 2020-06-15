@@ -11,3 +11,22 @@ class GameObject:
 
     def draw(self, background):
         background.blit(self.image, (self.x_pos, self.y_pos))
+
+
+class PlayerObject(GameObject):
+    __speed = 10
+
+    def __init__(self, image_path, x, y, width, height):
+        super().__init__(image_path, x, y, width, height)
+
+    def change_speed(self, speed):
+        self.__speed = speed
+
+    def move(self, direction):
+        if direction != 1 or direction != -1:
+            print("Direction should be either -1 or 1")
+            return
+
+        self.y_pos += direction * self.__speed
+
+    
