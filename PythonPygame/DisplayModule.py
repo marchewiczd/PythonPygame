@@ -1,5 +1,5 @@
 import pygame
-
+import GameModules
 
 class GameScreen():
     """
@@ -56,6 +56,9 @@ class GameScreen():
         Bool
             True if no errors, false otherwise.
         """
+        player = GameModules.PlayerObject(self.__player_img, 375, 700, 50, 50)
+        direction = 0
+
         if not self.__init_display():
             print("There were problems initializing the display.")
             return False
@@ -66,9 +69,25 @@ class GameScreen():
                 if event.type == pygame.QUIT:
                     self.__is_shutdown = True
 
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        #move up
+                        direction = -1
+                    elif event.key == pygame.K_DOWN:
+                        #move down
+                        direction = 1
+
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                        #move down
+                        direction = 0
+
+            player.move(direction)
+            self.game_screen.fill(self.__white_rgb_color)
+            player.draw(self.game_screen)
+
             pygame.display.update()
-            self.__clock.tick(self.__tick_rate)
-            self.game_screen.blit(self.__player_image, (375, 375))
+            self.__clock.tick(self.__tick_rate)            
         
         return True
 
